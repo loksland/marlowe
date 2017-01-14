@@ -33,7 +33,7 @@ $ marlowe
 
 You will be prompted for the following info:
 
-**IN dir**
+**IN dir**  
 The full filepath to the root directory of unsorted media files to trawl. This dir will be emptied over time as files are processed and copied to the **OUT** dir.  
 
 WARNING Any existing folders in this dir will be deleted, as well as files that begin with `.`.  
@@ -42,16 +42,16 @@ All media files will be processed, subtitle files will be retained if they have 
 
 All other files will be moved to the **FAIL** dir. 
 
-**OUT dir**
+**OUT dir**  
 The full filepath to the root directory of where to organize the media file library. Ideally this would be an empty directory to begin with, or previously organized by Marlowe.
 
-**FAIL dir**
+**FAIL dir**  
 A separate folder to put files that failed to parse, duplicates or files of invalid extensions. Ideally this would be an empty directory to begin with, or previously used by Marlowe.
 
-**Blacklist IPs**
+**Blacklist IPs**  
 The script will not run if the public IP of the system running the script is detected to be any IPs entered here.
 
-*Debug mode**
+*Debug mode**  
 If true then a JSON data file will be saved next to the renamed media files and browser windows will be visible during processing.
 
 Disclaimer
