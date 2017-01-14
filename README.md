@@ -31,7 +31,7 @@ Getting started
 $ marlowe
 ```
 
-You will be prompted for paths:
+You will be prompted for the following info:
 
 **IN dir**
 The full filepath to the root directory of unsorted media files to trawl. This dir will be emptied over time as files are processed and copied to the **OUT** dir.  
@@ -49,10 +49,10 @@ The full filepath to the root directory of where to organize the media file libr
 A separate folder to put files that failed to parse, duplicates or files of invalid extensions. Ideally this would be an empty directory to begin with, or previously used by Marlowe.
 
 **Blacklist IPs**
-The script will not run if the public IP is detected to be any IPs entered here.
+The script will not run if the public IP of the system running the script is detected to be any IPs entered here.
 
 *Debug mode**
-If true then a JSON data file will be saved next to the renamed media files.
+If true then a JSON data file will be saved next to the renamed media files and browser windows will be visible during processing.
 
 Disclaimer
 ----------
