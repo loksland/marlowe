@@ -1,0 +1,39 @@
+{
+  "name": "marlowe",
+  "version": "0.1.0",
+  "description": "Video file organizer",
+  "main": "rupert-ui.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/loksland/marlowe.git"
+  },
+  "author": "loksland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loksland/marlowe/issues"
+  },
+  "homepage": "https://github.com/loksland/marlowe",
+  "preferGlobal": "true",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "cli-spinner": "^0.2.5",
+    "download": "^5.0.2",
+    "external-ip": "^0.2.4",
+    "moment": "^2.17.1",
+    "ncp": "^2.0.0",
+    "nightmare": "^2.9.0",
+    "nightmare-load-filter": "^0.2.0",
+    "progress": "^1.1.8",
+    "readline-sync": "^1.4.5",
+    "user-settings": "^0.1.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
+  },
+  "bin": {
+    "marlowe": "rupert-ui.js"
+  }
+}
