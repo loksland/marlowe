@@ -51,7 +51,7 @@ A separate folder to put files that failed to parse, duplicates or files of inva
 **Blacklist IPs**  
 The script will not run if the public IP of the system running the script is detected to be any IPs entered here.
 
-*Debug mode**  
+**Debug mode**  
 If true then a JSON data file will be saved next to the renamed media files and browser windows will be visible during processing.
 
 Disclaimer
