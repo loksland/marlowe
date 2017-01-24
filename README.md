@@ -61,4 +61,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### Release History ###
 
+- v0.1.4 - Avoiding false positives, capturing rejected promises
 - v0.1.0 - Initial release

@@ -22,7 +22,7 @@ function RupertUI(){
 	var username = settings.get('username');
 	*/
 	
-	var settings = require('user-settings').file('.rupert-settings2');
+	var settings = require('user-settings').file('.marlowe-settings');
 	
 	console.log('');
 	
@@ -103,6 +103,9 @@ function RupertUI(){
 		console.log('DEBUG MODE\n');
 	}
 	
+	
+	console.log('MARLOWE');
+	console.log('======');
 	
 	var r = new Rupert();
 	r.goCrawl(inDir,

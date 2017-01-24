@@ -42,7 +42,7 @@ function Marlowe(){
 };
 
 Marlowe.SHOW_NIGHTMARE = false; // Show electron browser
-Marlowe.SCRAPE_LOAD_WAIT = 500; // Wait a little bit after page loads
+Marlowe.SCRAPE_LOAD_WAIT = 3*500; // Wait a little bit after page loads
 
 Marlowe.applyDebugMode = function(){
 	Marlowe.SHOW_NIGHTMARE = true;
@@ -57,7 +57,7 @@ Marlowe.getAllData = function(filename, cb){
 		if (err){
 			return cb(err);
 		}
-		
+				
 		var updateErr = Marlowe.updateDataBasedOnFilenameAttributes(imdbData, filename);
 		if (updateErr){
 			return cb(updateErr);
@@ -85,7 +85,6 @@ Marlowe.getAllData = function(filename, cb){
 			
 			});
 			
-		
 		});
 		
 	});
@@ -267,20 +266,80 @@ Marlowe.getIMDBData = function(filename, cb){
 				return cb(err);
 			}
 			
+			var matchResult = Marlowe.doesDataMatchFilename(filename, data);
+			if (matchResult !== true){
+				return cb(matchResult);
+			}
+			
 			return cb(null, data);
 			
 		});
-		
 	});
+	
+}
+
+// Ignore these words when comparing titles
+Marlowe.COMMON_WORDS = ['the','and','that','have','with','you','into','when','from','there'];
+
+Marlowe.doesDataMatchFilename = function(filename, data){
+
+	var guess = Marlowe.guessByFilename(filename);
+	
+	if (!utils.isSet(guess.title) || !utils.isSet(data.title)){
+		return new Error('Data doesn\'t match filename. Title not found.');
+	}
+	
+	var titleWordsGuess = Marlowe.makeWordList(guess.title);
+	var titleWordsData = Marlowe.makeWordList(data.title);
+	
+	var matchTotal = Math.min(titleWordsData.length, titleWordsData.length);
+	
+	if (matchTotal == 0){
+		return new Error('Data doesn\'t match filename. Couldn\'t find any unique words in title.');
+	}
+	var matchCount = 0;
+	for (var i = 0; i < titleWordsGuess.length; i++){
+		if (titleWordsData.indexOf(titleWordsGuess[i]) > -1){
+			matchCount++;
+		}
+	}
+	
+	// Could set a % threshold in the future 
+	//var matchPerc = matchCount/matchTotal;
+	//var matchPercReadable = Math.round(matchPerc*100);
+	
+	if (matchCount == 0){ // 1 word should match at least
+		return new Error('Data doesn\'t match filename. No matching title words found. {titleWordsGuess:`'+titleWordsGuess.join(',')+'`,titleWordsData:`'+titleWordsData.join(',')+'`}');
+	}
+	
+	return true;
+
+}
+
+Marlowe.makeWordList = function(str){
+	
+	str = str.toLowerCase()
+	str = str.replace(/[^a-z ]/gmi, '');
+	var listTmp = str.split(' ');
+	var list = [];
+	for (var i = 0; i < listTmp.length; i++){
+		if (listTmp[i].length < 3){
+			// Ignore words under 3 chars
+		} else if (Marlowe.COMMON_WORDS.indexOf(listTmp[i]) > -1){
+			// Ignore common words
+		} else {
+			list.push(listTmp[i]);
+		}
+	}
+	
+	return list;
 	
 }
 
 Marlowe.scrapeIMDB = function(IMDBpageURL, cb){
 
 	// Scrape URL
-	
-	//var guess = Marlowe.guessByFilename(filename);
-	
+		
 	var nightmare = Nightmare({show: Marlowe.SHOW_NIGHTMARE}) ;//, waitTimeout: 3000, dock: true})
 
 	nightmare
@@ -492,6 +551,8 @@ Marlowe.scrapeIMDB = function(IMDBpageURL, cb){
 				
 			}
 			
+		}).catch(function() {
+			cb(new Error('Promise rejection'))
 		});
 	
 }
@@ -672,6 +733,8 @@ Marlowe.getIMDBVideoFileURLFromID = function(videoID, cb){ // Video id is IMDB's
 				
 			}
     	
+		}).catch(function() {
+			cb(new Error('Promise rejection'))
 		});
 
 }
@@ -835,6 +898,8 @@ Marlowe.scrapeRottenTomatoesRatingFromPage = function(url, cb){
 				
 			}
     	
+		}).catch(function() {
+			cb(new Error('Promise rejection'))
 		});
 		
 }
@@ -903,6 +968,8 @@ Marlowe.searchGoogle = function(term, maxResultCount, cb){
 				
 			}
     	
+		}).catch(function() {
+			cb(new Error('Promise rejection'))
 		});
 		
 }

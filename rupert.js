@@ -22,8 +22,7 @@ var Spinner = require('cli-spinner').Spinner;
 
 function Rupert(){
 	
-	console.log('RUPERT');
-	console.log('======');
+
 	
 	this.setStatus(Rupert.STATUS_PAUSED);
 	
@@ -690,7 +689,6 @@ Rupert.findNextMediaFileRecursive = function(fsPath, randomiseFileListing){
 			//	files.reverse();
 			//}
 			if (randomiseFileListing){
-			console.log('rand')
 				files = utils.shuffleArray(files);
 			
 			}

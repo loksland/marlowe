@@ -1,6 +1,6 @@
 {
   "name": "marlowe",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "Researches and organizes media file libraries",
   "main": "rupert-ui.js",
   "scripts": {
